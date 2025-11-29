@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-word=$(cat /usr/share/dict/words | egrep ^......?.?.?$ | shuf -n 1)
+word=$(cat /usr/share/dict/words | egrep "^[a-z]{5,8}$" | shuf -n 1)
 word_count=$(echo -n $word | wc -c)
 max_attempts=6
 attempt=0
