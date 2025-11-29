@@ -10,6 +10,12 @@ match=0
 flag=0
 
 read -p "Do you want to play this game?(y/n): " start
+
+while [[ ! $start =~ ^(y|Y|yes|Yes|YES|n|no|No|NO)$ ]]
+do
+	read -p "Please enter y (play) or n (quit): " start		
+done
+
 while [[ $start =~ ^(y|Y|yes|Yes|YES)$ ]]
 do
 	echo $word
@@ -70,6 +76,7 @@ do
 				echo -n "_"
 			fi
 		done
+
 		echo
 		((attempt++))
 		match=0
