@@ -1,7 +1,9 @@
 #!/usr/bin/bash
 
 word=$(shuf -n 1 /usr/share/dict/words)
+count=$(echo -n $word | wc -c)
 
 echo $word
+echo $count
 
 
