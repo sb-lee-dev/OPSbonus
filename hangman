@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+word=$(shuf -n 1 /usr/share/dict/words)
+
+echo $word
+
+
