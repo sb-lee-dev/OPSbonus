@@ -18,63 +18,66 @@ do
         	echo -n "_"
 	done
 	echo
-while [[ $attempt -lt $max_attempts && flag -eq 0 ]]
-do	
-	read -p "Would you like to guess the word now (y/n)? " yesno
-	if [[ $yesno == yes || $yesno == y || $yesno == Y || $yesno == Yes || $yesno == YES ]]
-	then
-		read -p "Guess the word!: " guess_word
-		if [[ $guess_word == $word ]]
+
+	while [[ $attempt -lt $max_attempts && flag -eq 0 ]]
+	do	
+		read -p "Would you like to guess the word now (y/n)? " yesno
+	
+		if [[ $yesno == yes || $yesno == y || $yesno == Y || $yesno == Yes || $yesno == YES ]]
 		then
-			flag=1
-			echo "You got the correct answer!"
-			echo "The word was $word"
-			echo "Your score: $((++score))"
-			continue
-		else
-			echo "Your guess was wrong!"
-			((attempt++))
-		fi	
-	fi 
-	
-	read -p "Attempt $(($attempt+1)): " guess_letter
-	
-	while [[ ! $guess_letter =~ ^[a-z]$ ]]
-	do
-		echo "You must enter one char letter!"
-		read -p "Attempt $(($attempt+1)): " guess_letter
-	done
-
-	if [[ $guess_letters == *$guess_letter* ]]
-        then
-                echo "You already entered '$guess_letter'"
-        	continue
-	fi
-	guess_letters+=$guess_letter	
-
-	for(( c=0; c<$word_count; c++ ))
-	do
-		if [[ $guess_letters == *${word:$c:1}* ]]
-			then echo -n ${word:$c:1}
-			((match++))
-			if [[ $match -eq $word_count ]]
+			read -p "Guess the word!: " guess_word
+			if [[ $guess_word == $word ]]
 				then
-					flag=1
-					echo "You got the correct answer!"
-					echo "The word was $word!"
-					echo "Your score: $((++score))"
-			fi
-		else 
-			echo -n "_"
+				flag=1
+				echo "You got the correct answer!"
+				echo "The word was $word"
+				echo "Your score: $((++score))"
+				continue
+			else
+				echo "Your guess was wrong!"
+				((attempt++))
+			fi	
+		fi 
+	
+		read -p "Attempt $(($attempt+1)): " guess_letter
+		
+		while [[ ! $guess_letter =~ ^[a-z]$ ]]
+		do
+			echo "You must enter one char letter!"
+			read -p "Attempt $(($attempt+1)): " guess_letter
+		done
+
+		if [[ $guess_letters == *$guess_letter* ]]
+        	then
+	                echo "You already entered '$guess_letter'"
+        		continue
 		fi
+		guess_letters+=$guess_letter	
+
+		for(( c=0; c<$word_count; c++ ))
+		do
+			if [[ $guess_letters == *${word:$c:1}* ]]
+				then echo -n ${word:$c:1}
+				((match++))
+				if [[ $match -eq $word_count ]]
+					then
+						flag=1
+						echo "You got the correct answer!"
+						echo "The word was $word!"
+						echo "Your score: $((++score))"
+				fi
+			else 
+				echo -n "_"
+			fi
+		done
+		echo
+		((attempt++))
+		match=0
 	done
-	echo
-	((attempt++))
-	match=0
-done
-read -p "Do you want to play again?(y/n): " start
-word=$(cat /usr/share/dict/words | egrep "^[a-z]{6,8}$" | shuf -n 1)
-attempt=0
-flag=0
+	
+	read -p "Do you want to play again?(y/n): " start
+	word=$(cat /usr/share/dict/words | egrep "^[a-z]{6,8}$" | shuf -n 1)
+	attempt=0
+	flag=0
 
 done
