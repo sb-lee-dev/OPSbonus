@@ -1,11 +1,13 @@
 #!/usr/bin/bash
 
-word=$(shuf -n 1 /usr/share/dict/words)
+word=$(cat /usr/share/dict/words | egrep ^......?.?.?$ | shuf -n 1)
 count=$(echo -n $word | wc -c)
 
 echo $word
 echo $count
 i=0
+
+
 
 for (( i=0; i<$count; i++ ))
 do
