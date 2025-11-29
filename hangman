@@ -4,6 +4,7 @@ word=$(cat /usr/share/dict/words | egrep "^[a-z]{6,8}$" | shuf -n 1)
 word_count=$(echo -n $word | wc -c)
 max_attempts=8
 attempt=0
+score=0
 
 echo $word
 match=0
@@ -27,6 +28,7 @@ do
 			flag=1
 			echo "You got the correct answer!"
 			echo "The word was $word"
+			echo "Your score: $((++score))"
 			continue
 		else
 			echo "Your guess was wrong!"
@@ -59,6 +61,7 @@ do
 					flag=1
 					echo "You got the correct answer!"
 					echo "The word was $word!"
+					echo "Your score: $((++score))"
 			fi
 		else 
 			echo -n "_"
