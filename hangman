@@ -18,11 +18,13 @@ done
 
 while [[ $start =~ ^(y|Y|yes|Yes|YES)$ ]]
 do
+	echo "The word has $word_count characters!"
 	echo "The answer: $word"
 	for (( i=0; i<$word_count; i++ ))
 	do
         	echo -n "_"
 	done
+	echo
 	echo
 
 	while [[ $attempt -lt $max_attempts && flag -eq 0 ]]
@@ -38,9 +40,11 @@ do
 				echo "You got the correct answer!"
 				echo "The word was $word"
 				echo "Your score: $((++score))"
+				echo
 				continue
 			else
 				echo "Your guess was wrong!"
+				echo
 				((attempt++))
 				continue
 			fi	
@@ -57,6 +61,7 @@ do
 		if [[ $guess_letters == *$guess_letter* ]]
         	then
 	                echo "You already entered '$guess_letter'"
+			echo
         		continue
 		fi
 		guess_letters+=$guess_letter	
@@ -79,6 +84,7 @@ do
 		done
 
 		echo
+		echo
 		((attempt++))
 		match=0
 	done
@@ -87,6 +93,8 @@ do
 	then
 		echo "You lost!"
 		echo "The answer was $word"
+		echo "Your Score: $score"
+		echo
 	fi
 	
 	read -p "Do you want to play again?(y/n): " start
