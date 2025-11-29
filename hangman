@@ -1,14 +1,11 @@
 #!/usr/bin/bash
 
 word=$(cat /usr/share/dict/words | egrep ^......?.?.?$ | shuf -n 1)
-max_attempts=6
 word_count=$(echo -n $word | wc -c)
+max_attempts=6
+attempt=0
 
 echo $word
-echo $word_count
-i=0
-j=0
-c=0
 match=0
 
 for (( i=0; i<$word_count; i++ ))
@@ -17,9 +14,9 @@ do
 done
 echo 
 
-while [[ j -lt $max_attempts || match -eq word_count ]]
+while [[ attempt -lt $max_attempts || match -eq word_count ]]
 do
-	read -p "Attempt $((j+1)): " guess_letter
+	read -p "Attempt $((attempt+1)): " guess_letter
 
 	for(( c=0; c<$word_count; c++ ))
 	do
@@ -28,7 +25,7 @@ do
 			((match++))
 			fi
 	done
-	((j++))
+	((attempt++))
 done
 
 echo "$match"
