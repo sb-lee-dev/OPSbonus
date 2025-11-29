@@ -14,7 +14,7 @@ do
 done
 echo 
 
-while [[ attempt -lt $max_attempts || match -eq word_count ]]
+while [[ attempt -lt $max_attempts && match -lt word_count ]]
 do	
 	read -p "Attempt $((attempt+1)): " guess_letter
 	
@@ -27,11 +27,14 @@ do
 
 	for(( c=0; c<$word_count; c++ ))
 	do
-		if [[ $guess_letter == ${word:$c:1} ]]
-			then echo ${word:$c:1}
+		if [[ $guess_letters == *${word:$c:1}* ]]
+			then echo -n ${word:$c:1}
 			((match++))
+		else 
+			echo -n "_"
 		fi
 	done
+	echo
 	((attempt++))
 done
 
