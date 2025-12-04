@@ -50,12 +50,12 @@ do
 			fi	
 		fi 
 	
-		read -p "Attempt $(($attempt+1)): " guess_letter
+		read -p "Attempt $(($attempt+1))/$max_attempts: " guess_letter
 		
 		while [[ ! $guess_letter =~ ^[a-z]$ ]]
 		do
 			echo "You must enter one char letter!"
-			read -p "Attempt $(($attempt+1)): " guess_letter
+			read -p "Attempt $(($attempt+1))/$max_attempts: " guess_letter
 		done
 
 		if [[ $guess_letters == *$guess_letter* ]]
