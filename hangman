@@ -18,6 +18,7 @@ done
 
 while [[ $start =~ ^(y|Y|yes|Yes|YES)$ ]]
 do
+	echo "You have $max_attempts attempts!"
 	echo "The word has $word_count characters!"
 	echo "The answer: $word"
 	for (( i=0; i<$word_count; i++ ))
