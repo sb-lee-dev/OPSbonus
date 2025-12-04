@@ -30,7 +30,7 @@ do
 
 	while [[ $attempt -lt $max_attempts && flag -eq 0 ]]
 	do	
-		read -p "Would you like to guess the word now (y/n)? " yesno
+		read -p "Would you like to guess the word now (y/else)? " yesno
 	
 		if [[ $yesno =~ ^(y|Y|yes|Yes|YES)$ ]]
 		then
@@ -45,8 +45,9 @@ do
 				continue
 			else
 				echo "Your guess was wrong!"
-				echo
 				((attempt++))
+				echo "Attempt $((attempt))/$max_attempts"
+				echo 
 				continue
 			fi	
 		fi 
